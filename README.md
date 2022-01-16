@@ -6,6 +6,6 @@ Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nas
 
 ## Results
 
-| word  | score | by # guesses |
-|-------|-------|--------------|
-| trace | 1388  | 1, 75, 1312  |
+| word  | score | by # guesses | feedback | word  | score | by # guesses |
+|-------|-------|--------------|----------|-------|-------|--------------|
+| trace | 1388  | 1, 75, 1312  | 🟩🟩🟩🟩🟩    |       |       |              |
