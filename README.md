@@ -1,8 +1,13 @@
 # wordle3
 
-Program to solve for the 2022-1-14 Riddler Classic found at [When The Riddler Met Wordle](https://fivethirtyeight.com/features/when-the-riddler-met-wordle/), based on the game [Wordle](https://www.powerlanguage.co.uk/wordle/).
+Program to solve for the 2022-1-14 Riddler Classic found at [When The Riddler Met Wordle](https://fivethirtyeight.com/features/when-the-riddler-met-wordle/), based on the web game [Wordle](https://www.powerlanguage.co.uk/wordle/).
 
 Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nasderidaq/wordle3/blob/master/wordle.html) (use the console and the `window.wordle` exports).
+
+## Strategy
+
+The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. There are a few optimizations at play:
+* If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
 
 ## Results
 
