@@ -4,9 +4,11 @@ Program to solve for the 2022-1-14 Riddler Classic found at [When The Riddler Me
 
 Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nasderidaq/wordle3/blob/master/wordle.html) (use the console and the `window.wordle` exports).
 
+This is just a simple single-file JavaScript program, with the word sets directly inlined (and sorted) from Wordle's source, and using Web Workers to achieve parallelism.
+
 ## Strategy
 
-This JavaScript program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. The search spawns a number of threads equal to the number of available cores, and divies up the root words to search amongst them. Go dumb parallelism, go!
+The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. This search spawns a number of threads equal to the number of available cores, and divvies up the root words to search amongst them. Go dumb parallelism, go!
 
 There are a few optimizations at play:
  * If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
