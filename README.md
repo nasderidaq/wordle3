@@ -12,7 +12,7 @@ There are a few optimizations at play:
  * If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
  * If have only 1 or 2 valid remaining answers, just guess one of them (we know this is optimal)
  * We keep track of the best score we have, and use that as a "minimum" while evaluating each position, and we bail out early if we know we cannot achieve that minimum
- * If we see only a single possible feedback result for all valid remaining answers, then we know we bail because we guessed a word that gave us no new information
+ * If we see only a single possible feedback result for all valid remaining answers, then we bail because we guessed a word that gave us no new information
 
 ## Results
 
