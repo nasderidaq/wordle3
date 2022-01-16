@@ -22,7 +22,7 @@ Barring any bugs (🤷), the result is guaranteed to be optimal. For me, the ful
 
 ## Results
 
-The answer to the question posed in the Riddler appears to be `trace`, resulting in 1388 success for a rate of 59.95% (1 word shy of exactly 60%).
+The answer to the question posed in the Riddler appears to be `trace`, resulting in 1388 successes for a rate of 59.95% (1 word shy of exactly 60%).
 
 | word  | score | by # guesses | feedback | word  | score | by # guesses |
 |-------|-------|--------------|----------|-------|-------|--------------|
