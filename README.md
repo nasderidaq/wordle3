@@ -11,9 +11,10 @@ This JavaScript program performs an exhaustive tree search given the list of pos
 There are a few optimizations at play:
  * If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
  * If have only 1 or 2 valid remaining answers, just guess one of them (we know this is optimal)
+ * If we manage to get every single valid remaining answer in a given search node, we bail out early knowing we are optimal
  * We keep track of the best score we have, and use that as a "minimum" while evaluating each position, and we bail out early if we know we cannot achieve that minimum
  * If we see only a single possible feedback result for all valid remaining answers, then we bail because we guessed a word that gave us no new information
- * If we are on our penultimate (2nd) guess, we know the best we can possibly do is equal to the highest number of feedback entries for any word compared against all valid answers, which happens to be 150.
+ * If we are on our penultimate (2nd) guess, we know the best we can possibly do is equal to the highest number of feedback entries for any word compared against all valid answers, which happens to be 150
 
 Barring any bugs (🤷), the result is guaranteed to be optimal. For me, the full search took ~10 hours running on 8 cores.
 
