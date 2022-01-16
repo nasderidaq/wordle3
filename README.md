@@ -9,3 +9,4 @@ Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nas
 | word  | score | by # guesses | feedback | word  | score | by # guesses |
 |-------|-------|--------------|----------|-------|-------|--------------|
 | trace | 1388  | 1, 75, 1312  | 🟩🟩🟩🟩🟩    |       |       |              |
+|       |       |              | 🟨🟩🟨⬜⬜    | artsy | 1     | 1            |
