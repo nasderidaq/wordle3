@@ -6,7 +6,7 @@ Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nas
 
 ## Strategy
 
-The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. This search spawns a number of threads equal to the number of available cores, and divies up the root words to search amongst them. Go dumb parallelism!
+The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. This search spawns a number of threads equal to the number of available cores, and divies up the root words to search amongst them. Go dumb parallelism, go!
 
 There are a few optimizations at play:
  * If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
@@ -15,7 +15,11 @@ There are a few optimizations at play:
  * If we see only a single possible feedback result for all valid remaining answers, then we bail because we guessed a word that gave us no new information
  * If we are on our penultimate (2nd) guess, we know the best we can possibly do is equal to the highest number of feedback entries for any word compared against all valid answers, which happens to be 150.
 
+Barring any bugs (🤷), the result is guaranteed to be optimal. For me, the full search took ~10 hours running on 8 cores.
+
 ## Results
+
+The answer to the question posed in the Riddler appears to be `trace`, resulting in 1388 success for a rate of 59.95% (1 word short of getting exactly 60%).
 
 | word  | score | by # guesses | feedback | word  | score | by # guesses |
 |-------|-------|--------------|----------|-------|-------|--------------|
