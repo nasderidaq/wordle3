@@ -6,8 +6,13 @@ Runnable playground [here](https://htmlpreview.github.io/?https://github.com/nas
 
 ## Strategy
 
-The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. There are a few optimizations at play:
-* If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
+The program performs an exhaustive tree search given the list of possible words, constantly narrowing down the valid remaining answers. This search spawns a number of threads equal to the number of available cores, and divies up the root words to search amongst them. Go dumb parallelism!
+
+There are a few optimizations at play:
+ * If we are on our last (3rd) guess, we know the best we can do is get one correct answer by guessing one of the valid remaining answers
+ * If have only 1 or 2 valid remaining answers, just guess one of them (we know this is optimal)
+ * We keep track of the best score we have, and use that as a "minimum" while evaluating each position, and we bail out early if we know we cannot achieve that minimum
+ * If we see only a single possible feedback result for all valid remaining answers, then we know we bail because we guessed a word that gave us no new information
 
 ## Results
 
