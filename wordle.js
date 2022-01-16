@@ -1623,21 +1623,3 @@
 		Game,
 	};
 }
-
-// new wordle.Game({others: []}).scoreAndLog();
-//
-// elapsed: 5568815 // old
-// score: count: 1346
-//        word: 'slate'
-
-// new wordle.Game().scoreAndLog();
-//
-// elapsed:  // in progress
-// score: count: 1388
-//        word: 'trace'
-
-// new wordle.Game({maxDepth: 4}).scoreAndLog({minimum: answers.length});
-//
-// elapsed: 
-// score: count: 
-//        word: ''
