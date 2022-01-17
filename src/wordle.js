@@ -1354,8 +1354,17 @@
 				this.map = map;
 			}
 
+			size() {
+				return this.map.size;
+			}
+
 			match() {
 				return this.map.has(matchKey);
+			}
+
+			sorted() {
+				// Increasing size buckets means the larger (harder) ones will have larger (tougher) minimum applied.
+				return [...this.map].sort(([, bucketA], [, bucketB]) => bucketA.length - bucketB.length);
 			}
 
 			static get(word, answers) {
@@ -1371,9 +1380,8 @@
 					}
 					bucket.push(answer);
 				}
-				// Increasing size buckets means the larger (harder) ones will have larger (tougher) minimum applied.
-				const mapEntries = [...map].sort(([, bucketA], [, bucketB]) => bucketA.length - bucketB.length);
-				return new Outcomes(new Map(mapEntries));
+
+				return new Outcomes(map);
 			}
 		};
 
@@ -1434,38 +1442,41 @@
 				let ties = 0;
 
 				for (const [i, word] of words.entries()) {
+					if (remaining === 2 && this.maxDist < minimum) {
+						// Scoring any word can't meet minimum even with maximum outcomes.
+						break;
+					}
 					const outcomes = Outcomes.get(word, filteredAnswers);
-					const decisions = new Map();
+					if (remaining === 2 && outcomes.size() < minimum) {
+						// The score is known and it is too small.
+						continue;
+					}
 
 					let maxPossible = answerCount;
 					let count = 0;
 					const counts = [0];
+					const decisions = new Map();
 					if (outcomes.match()) {
 						count += 1;
 						counts[0] = 1;
 						decisions.set(matchKey, null);
 					} else {
-						if (outcomes.map.size <= 1) {
+						if (outcomes.size() <= 1) {
 							// No new information.
 							continue;
 						}
 					}
 
-					for (const [key, bucket] of outcomes.map) {
+					for (const [key, bucket] of outcomes.sorted()) {
 						if (key !== matchKey) {
-							const scoreMinimum = max(bucket.length - (maxPossible - minimum), 0);
-							if (remaining === 3 && scoreMinimum > this.maxDist) {
-								// Scoring this bucket won't meet minimum.
-								break;
-							}
-
 							let scoreWords = bucket;
-							if (remaining > 2 && scoreWords.length > 2) {
+							if (remaining - 1 > 1 && scoreWords.length > 2) {
 								const filteredSet = new Set(bucket);
 								scoreWords = bucket.concat(
 									this.answers.filter((answer) => !filteredSet.has(answer) && answer !== word),
 									this.others);
 							}
+							const scoreMinimum = max(bucket.length - (maxPossible - minimum), 0);
 							const score = this._score(scoreWords, bucket, remaining - 1, scoreMinimum, false);
 
 							count += score.count;
@@ -1487,13 +1498,15 @@
 							bestCounts = counts;
 							bestWord = word;
 							bestDecisions = decisions;
-							ties = -1;
-							minimum = max(minimum, count);
-						}
-						ties += 1;
-						if (bestCount >= answerCount) {
-							// Max count found.
-							break;
+							ties = 0;
+
+							minimum = max(minimum, bestCount);
+							if (bestCount >= answerCount) {
+								// Max count found.
+								break;
+							}
+						} else {
+							ties += 1;
 						}
 					}
 
@@ -1641,9 +1654,9 @@
 			const promise = this.score(params);
 			promise.then((score) => {
 				const end = Date.now();
-				console.log(score);
-				console.log({elapsed: end - start});
 				console.log(printScore(score));
+				console.log({elapsed: end - start});
+				console.log(score);
 			});
 			return promise;
 		}
